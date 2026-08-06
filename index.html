@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tour Guidance BD - Premier luxury travel agency in Bangladesh. Official sales partner for MV Karnafully Express ship tickets, 5-star hotel rooms, Saint Martin cruise & Scania bus tickets.">
+  <meta name="keywords" content="MV Karnafully Express, Karnafuly Express Ticket Price, Saint Martin Cruise, Tour Guidance BD, Bangladesh Tour Packages, Cox's Bazar Ship Ticket">
+  <meta name="author" content="Tour Guidance BD">
+  
+  <title>Tour Guidance BD | MV Karnafully Express & Luxury Travel</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B2518'/><path d='M50 20 L65 50 L50 42 L35 50 Z' fill='%23D4AF37'/><path d='M50 80 L65 50 L50 58 L35 50 Z' fill='%23355E3B'/></svg>">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Feather Icons SVG helper library CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <div class="top-info-item">
+          <i data-feather="phone"></i>
+          <span id="topBarPhone">Hotline: +880 1610-051005</span>
+        </div>
+        <div class="top-info-item">
+          <i data-feather="mail"></i>
+          <span id="topBarEmail">info@tourguidancebd.com</span>
+        </div>
+        <div class="top-info-item">
+          <i data-feather="map-pin"></i>
+          <span id="topBarAddress">Gulshan-2, Dhaka, Bangladesh</span>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-info-item">
+          <i data-feather="anchor"></i>
+          <span>Official MV Karnafully Express Partner</span>
+        </div>
+        <a href="admin.html" class="top-info-item" style="color: var(--accent-gold); font-weight:700;">
+          <i data-feather="settings"></i> Admin Portal
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="header" id="header">
+    <div class="container navbar">
+      <a href="#home" class="logo">
+        <div class="logo-icon">
+          <i data-feather="compass"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Tour Guidance <span>BD</span></span>
+          <span class="logo-tagline">Luxury & Heritage Travel</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#services" class="nav-link">Our Services</a>
+        <a href="#karnafully" class="nav-link">Karnafully Cruise</a>
+        <a href="#destinations" class="nav-link">Destinations</a>
+        <a href="#why-us" class="nav-link">Why Choose Us</a>
+        <a href="#packages" class="nav-link">Tour Packages</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-sm" onclick="openBookingModal('MV Karnafully Cruise Ticket Request')">
+          <i data-feather="anchor"></i> Book Cruise
+        </button>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <i data-feather="compass"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title" style="color: #FFF;">Tour Guidance <span style="color: var(--accent-gold);">BD</span></span>
+        </div>
+      </div>
+      <button class="mobile-close" id="mobileClose">&times;</button>
+    </div>
+    <div class="mobile-links">
+      <a href="#home" class="mobile-link" onclick="toggleMobileNav()">Home</a>
+      <a href="#services" class="mobile-link" onclick="toggleMobileNav()">Our Services</a>
+      <a href="#karnafully" class="mobile-link" onclick="toggleMobileNav()">Karnafully Cruise</a>
+      <a href="#destinations" class="mobile-link" onclick="toggleMobileNav()">Destinations</a>
+      <a href="#why-us" class="mobile-link" onclick="toggleMobileNav()">Why Choose Us</a>
+      <a href="#packages" class="mobile-link" onclick="toggleMobileNav()">Tour Packages</a>
+      <a href="#reviews" class="mobile-link" onclick="toggleMobileNav()">Reviews</a>
+      <a href="#contact" class="mobile-link" onclick="toggleMobileNav()">Contact</a>
+      <a href="admin.html" class="mobile-link" style="color: var(--accent-gold);">Admin Panel</a>
+    </div>
+    <div style="margin-top: auto; padding-top: 20px;">
+      <button class="btn btn-primary" style="width: 100%;" onclick="toggleMobileNav(); openBookingModal('Mobile Menu Quick Book');">
+        Book Your Journey
+      </button>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-overlay-gradient"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <i data-feather="anchor"></i> Official Booking Partner: MV Karnafully Express
+      </div>
+      <h1 class="hero-title">
+        Discover Bangladesh with <span>Confidence</span>
+      </h1>
+      <p class="hero-subtitle">
+        Official MV Karnafully Express Ship Tickets, 5-Star Hotel Booking, Tour Packages & Complete Travel Solutions for Cox's Bazar & Saint Martin.
+      </p>
+      
+      <div class="hero-cta-group">
+        <button class="btn btn-primary" onclick="openBookingModal('MV Karnafully Cruise Ticket Request')">
+          <i data-feather="anchor"></i> Book Ship Tickets
+        </button>
+        <a href="#karnafully" class="btn btn-outline">
+          <i data-feather="compass"></i> View Cruise Prices
+        </a>
+      </div>
+
+      <!-- Quick Interactive Search Widget -->
+      <div class="search-widget">
+        <div class="search-tabs">
+          <button class="search-tab active" onclick="switchSearchTab(this, 'ships')">
+            <i data-feather="anchor"></i> Ship Tickets (Karnafully)
+          </button>
+          <button class="search-tab" onclick="switchSearchTab(this, 'tours')">
+            <i data-feather="map"></i> Tour Packages
+          </button>
+          <button class="search-tab" onclick="switchSearchTab(this, 'hotels')">
+            <i data-feather="home"></i> Hotel Booking
+          </button>
+          <button class="search-tab" onclick="switchSearchTab(this, 'buses')">
+            <i data-feather="truck"></i> Bus Tickets
+          </button>
+        </div>
+
+        <form class="search-form" onsubmit="handleSearch(event)">
+          <div class="form-group">
+            <label><i data-feather="anchor"></i> Ticket Class / Route</label>
+            <select class="form-control" id="searchDestination">
+              <option value="MV Karnafully Express - Lavender (৳ 3,500 RT)">MV Karnafully Express - Lavender (৳ 3,500 RT)</option>
+              <option value="MV Karnafully Express - Marigold (৳ 3,500 RT)">MV Karnafully Express - Marigold (৳ 3,500 RT)</option>
+              <option value="MV Karnafully Express - Open Deck (৳ 4,000 RT)">MV Karnafully Express - Open Deck (৳ 4,000 RT)</option>
+              <option value="MV Karnafully Express - Gladiolus (৳ 5,000 RT)">MV Karnafully Express - Gladiolus (৳ 5,000 RT)</option>
+              <option value="MV Karnafully Express - Lilac Lounge (৳ 5,300 RT)">MV Karnafully Express - Lilac Lounge (৳ 5,300 RT)</option>
+              <option value="MV Karnafully Express - Chrysanthemum (৳ 5,600 RT)">MV Karnafully Express - Chrysanthemum (৳ 5,600 RT)</option>
+              <option value="MV Karnafully Express - Single VIP Cabin (৳ 6,500 RT)">MV Karnafully Express - Single VIP Cabin (৳ 6,500 RT)</option>
+              <option value="MV Karnafully Express - Twin VIP Cabin (৳ 13,000 RT)">MV Karnafully Express - Twin VIP Cabin (৳ 13,000 RT)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label><i data-feather="calendar"></i> Travel Date</label>
+            <input type="date" class="form-control" id="searchDate" value="2026-08-15">
+          </div>
+
+          <div class="form-group">
+            <label><i data-feather="users"></i> Guests / Travelers</label>
+            <select class="form-control" id="searchGuests">
+              <option value="1 Person">1 Person (Solo)</option>
+              <option value="2 Persons" selected>2 Persons (Couple)</option>
+              <option value="3-5 Persons">3-5 Persons (Family)</option>
+              <option value="6+ Persons">6+ Persons (Group)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-green" style="width: 100%; padding: 12px 16px;">
+              <i data-feather="search"></i> Instant Book
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Services Section -->
+  <section class="section-padding" id="services">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i data-feather="layers"></i> What We Offer</span>
+        <h2 class="section-title">Our Premium Services</h2>
+        <p class="section-subtitle">
+          Comprehensive, hassle-free travel solutions engineered for safety, elegance, and unforgettable memories.
+        </p>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- Rendered Dynamically from script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: MV KARNAFULLY EXPRESS DEDICATED HUB -->
+  <section class="section-padding" id="karnafully" style="background: linear-gradient(180deg, var(--primary-dark) 0%, #071910 100%); color: var(--bg-white);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span class="section-tag" style="background: rgba(212,175,55,0.15); color: var(--accent-gold);">
+          <i data-feather="anchor"></i> Official Partner Hub
+        </span>
+        <h2 class="section-title" style="color: var(--bg-white);">MV Karnafully Express Ticket Prices & Schedule</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.85);">
+          Cox’s Bazar (BIWTA Nuniarchhor Ghat) ⇄ Saint Martin’s Island Sea Voyage. Departure: 09:00 AM | Return: 03:00 PM.
+        </p>
+      </div>
+
+      <!-- Booking Process Step Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 60px;">
+        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; border: 1px solid rgba(212,175,55,0.3); text-align: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-gold); color: var(--primary-dark); font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.2rem;">1</div>
+          <h4 style="color:#FFF; font-size:1.05rem; margin-bottom:6px;">Choose Your Plan</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7);">Select VIP Chair, Lounge, or Private Cabin class.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; border: 1px solid rgba(212,175,55,0.3); text-align: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-gold); color: var(--primary-dark); font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.2rem;">2</div>
+          <h4 style="color:#FFF; font-size:1.05rem; margin-bottom:6px;">Call / Chat Agent</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7);">Instant seat confirmation via Hotline or WhatsApp.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; border: 1px solid rgba(212,175,55,0.3); text-align: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-gold); color: var(--primary-dark); font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.2rem;">3</div>
+          <h4 style="color:#FFF; font-size:1.05rem; margin-bottom:6px;">Secure Payment</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7);">Pay via bKash, Nagad, Visa, or Mastercard.</p>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 16px; border: 1px solid rgba(212,175,55,0.3); text-align: center;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-gold); color: var(--primary-dark); font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-size: 1.2rem;">4</div>
+          <h4 style="color:#FFF; font-size:1.05rem; margin-bottom:6px;">Collect E-Ticket</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.7);">Receive official digital ticket instantly on WhatsApp/Email.</p>
+        </div>
+      </div>
+
+      <!-- Ticket Cards Grid -->
+      <div class="destinations-grid" id="karnafullyTicketsGrid">
+        <!-- Rendered Dynamically from script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Destinations Section -->
+  <section class="section-padding" id="destinations" style="background-color: var(--bg-white);">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i data-feather="globe"></i> Top Destinations</span>
+        <h2 class="section-title">Explore Featured Destinations</h2>
+        <p class="section-subtitle">
+          Immerse yourself in the majestic beauty of Bangladesh's most celebrated landscapes.
+        </p>
+      </div>
+
+      <div class="destinations-grid" id="destinationsGrid">
+        <!-- Rendered Dynamically from script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Tour Guidance BD Section -->
+  <section class="section-padding why-us" id="why-us">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag" style="background: rgba(212,175,55,0.15); color: var(--accent-gold);"><i data-feather="check-circle"></i> Unmatched Excellence</span>
+        <h2 class="section-title">Why Choose Tour Guidance BD</h2>
+        <p class="section-subtitle">
+          We combine local heritage expertise with luxury hospitality standards to deliver seamless, worry-free journeys.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="anchor"></i>
+          </div>
+          <div class="why-info">
+            <h4>Official Ship Ticket Partner</h4>
+            <p>Direct authorized ticketing for MV Karnafully Express, Bay One Cruise & Keari Sindbad with instant seats.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="dollar-sign"></i>
+          </div>
+          <div class="why-info">
+            <h4>Best Price Guarantee</h4>
+            <p>Direct contract pricing with top hotels, resorts, ship cruise lines & AC coaches without hidden markups.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="lock"></i>
+          </div>
+          <div class="why-info">
+            <h4>Secure Booking</h4>
+            <p>Instant verification via bKash, Nagad, Visa, Mastercard, & bank transfer with official money receipt.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="phone-call"></i>
+          </div>
+          <div class="why-info">
+            <h4>Professional Support</h4>
+            <p>24/7 dedicated travel manager standing by to assist with real-time updates and emergency support.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="award"></i>
+          </div>
+          <div class="why-info">
+            <h4>Experienced Team</h4>
+            <p>Govt. certified tour directors, licensed local guides, and experienced transport coordinators.</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">
+            <i data-feather="sliders"></i>
+          </div>
+          <div class="why-info">
+            <h4>Customized Tours</h4>
+            <p>Tailor your itinerary according to budget, duration, meal preferences, and transport preferences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Tour Packages -->
+  <section class="section-padding" id="packages">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i data-feather="package"></i> Curated Itineraries</span>
+        <h2 class="section-title">Popular Tour Packages</h2>
+        <p class="section-subtitle">
+          Handpicked luxury packages crafted for high comfort, memorable sightseeing, and gourmet local dining.
+        </p>
+      </div>
+
+      <div class="package-filters">
+        <button class="pkg-filter-btn active" onclick="filterPackages(this, 'all')">All Packages</button>
+        <button class="pkg-filter-btn" onclick="filterPackages(this, 'beach')">Beach & Cruise</button>
+        <button class="pkg-filter-btn" onclick="filterPackages(this, 'hill')">Hill Tracks</button>
+        <button class="pkg-filter-btn" onclick="filterPackages(this, 'jungle')">Jungle & Wildlife</button>
+      </div>
+
+      <div class="packages-grid" id="packagesGrid">
+        <!-- Rendered Dynamically from script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews / Testimonials -->
+  <section class="section-padding" id="reviews" style="background-color: var(--bg-white);">
+    <div class="container">
+      <div style="text-align: center;">
+        <span class="section-tag"><i data-feather="message-circle"></i> Testimonials</span>
+        <h2 class="section-title">What Our Travelers Say</h2>
+        <p class="section-subtitle">
+          Real feedback from travelers who experienced Bangladesh with Tour Guidance BD.
+        </p>
+      </div>
+
+      <div class="reviews-slider-wrapper">
+        <div class="reviews-track" id="reviewsTrack">
+          <!-- Rendered Dynamically from script.js -->
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn" id="prevReview"><i data-feather="chevron-left"></i></button>
+          <div class="slider-dots" id="sliderDots"></div>
+          <button class="slider-btn" id="nextReview"><i data-feather="chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-target="10000">0</div>
+          <div class="stat-label">Happy Travelers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="500">0</div>
+          <div class="stat-label">Successful Tours</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="100">0</div>
+          <div class="stat-label">Hotel Partners</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="247">24/7</div>
+          <div class="stat-label">Customer Support</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call To Action Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Start Your Next Adventure Today</h2>
+        <p>
+          Ready to experience MV Karnafully Express cruise & the breathtaking beauty of Bangladesh with zero hassle? Connect with us now.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="openBookingModal('CTA Section Book Now')">
+            <i data-feather="send"></i> Book Now
+          </button>
+          <a href="https://wa.me/8801610051005" id="ctaWhatsappBtn" target="_blank" class="btn btn-outline">
+            <i data-feather="message-square"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: About -->
+        <div class="footer-col">
+          <a href="#home" class="logo" style="margin-bottom: 16px;">
+            <div class="logo-icon">
+              <i data-feather="compass"></i>
+            </div>
+            <div class="logo-text">
+              <span class="logo-title" style="color: #FFF;">Tour Guidance <span style="color: var(--accent-gold);">BD</span></span>
+            </div>
+          </a>
+          <p class="footer-desc">
+            Bangladesh's premier luxury travel & tourism brand. Official sales partner for MV Karnafully Express cruise tickets, 5-star hotel reservations & luxury transport solutions.
+          </p>
+          <div class="social-links" id="footerSocialLinks">
+            <!-- Dynamic Social Links -->
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="#home"><i data-feather="chevron-right" style="width:12px;"></i> Home</a>
+            <a href="#karnafully"><i data-feather="chevron-right" style="width:12px;"></i> MV Karnafully Express</a>
+            <a href="#services"><i data-feather="chevron-right" style="width:12px;"></i> Our Services</a>
+            <a href="#destinations"><i data-feather="chevron-right" style="width:12px;"></i> Destinations</a>
+            <a href="#packages"><i data-feather="chevron-right" style="width:12px;"></i> Tour Packages</a>
+            <a href="admin.html" style="color: var(--accent-gold); font-weight: 700;"><i data-feather="settings" style="width:12px;"></i> Admin Dashboard</a>
+          </div>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="footer-col">
+          <h4>MV Karnafully Classes</h4>
+          <div class="footer-links">
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Lavender Class')">Lavender Class (৳ 3,500)</a>
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Marigold Class')">Marigold Class (৳ 3,500)</a>
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Open Deck')">Open Deck Class (৳ 4,000)</a>
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Gladiolus Class')">Gladiolus VIP (৳ 5,000)</a>
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Single VIP Cabin')">Single VIP Cabin (৳ 6,500)</a>
+            <a href="javascript:void(0)" onclick="openBookingModal('MV Karnafully Ticket: Twin VIP Cabin')">Twin VIP Cabin (৳ 13,000)</a>
+          </div>
+        </div>
+
+        <!-- Col 4: Contact Information -->
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <div class="contact-info-list">
+            <div class="contact-info-item">
+              <i data-feather="phone"></i>
+              <div id="footerPhone">
+                <strong>Hotline:</strong><br>
+                +880 1610-051005 / 09613-888000
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i data-feather="message-circle"></i>
+              <div id="footerWaText">
+                <strong>WhatsApp Support:</strong><br>
+                +880 1610-051005
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i data-feather="mail"></i>
+              <div id="footerEmail">
+                <strong>Email:</strong><br>
+                info@tourguidancebd.com
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i data-feather="map-pin"></i>
+              <div id="footerAddress">
+                <strong>Office Address:</strong><br>
+                Suite 704, Green Tower, Gulshan-2, Dhaka-1212, Bangladesh
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Tour Guidance BD & Official MV Karnafully Express Partner. All Rights Reserved.
+        </div>
+        <div class="payment-badge-group">
+          <span style="font-size:0.8rem; margin-right:6px;">Accepted Payments:</span>
+          <span class="payment-badge" style="background:#E2136E;">bKash</span>
+          <span class="payment-badge" style="background:#F7921E;">Nagad</span>
+          <span class="payment-badge" style="background:#1A1F71;">VISA</span>
+          <span class="payment-badge" style="background:#EB001B;">Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/8801610051005?text=Hello%20Tour%20Guidance%20BD,%20I%20want%20to%20book%20MV%20Karnafully%20Express%20Ship%20Tickets." target="_blank" class="whatsapp-float" id="whatsappFloat">
+    <svg class="whatsapp-icon" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+    <span>Chat on WhatsApp</span>
+  </a>
+
+  <!-- Interactive Booking Request Modal -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeBookingModal()">&times;</button>
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="section-tag" style="margin-bottom:6px;"><i data-feather="anchor"></i> Ship Ticket & Cruise Booking</span>
+        <h3 style="font-size: 1.6rem; color: var(--primary-dark);" id="modalTitle">Book Your Ticket</h3>
+        <p style="font-size:0.9rem; color: var(--text-secondary);" id="modalSubtitle">MV Karnafully Express & Tour Guidance BD Instant Ticket Reservations</p>
+      </div>
+
+      <form id="bookingForm" onsubmit="submitBookingForm(event)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label><i data-feather="user"></i> Full Name</label>
+            <input type="text" class="form-control" id="bookName" placeholder="e.g. Tanvir Ahmed" required>
+          </div>
+          <div class="form-group">
+            <label><i data-feather="phone"></i> Phone / WhatsApp</label>
+            <input type="tel" class="form-control" id="bookPhone" placeholder="+880 1610-051005" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="form-group">
+            <label><i data-feather="mail"></i> Email Address</label>
+            <input type="email" class="form-control" id="bookEmail" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label><i data-feather="anchor"></i> Cruise Class / Package</label>
+            <input type="text" class="form-control" id="bookPackage" value="MV Karnafully Express - Gladiolus VIP (৳ 5,000 Round Trip)" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label><i data-feather="calendar"></i> Departure Date</label>
+            <input type="date" class="form-control" id="bookDate" value="2026-08-20" required>
+          </div>
+          <div class="form-group">
+            <label><i data-feather="users"></i> Number of Persons</label>
+            <input type="number" class="form-control" id="bookGuests" min="1" max="50" value="2" required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label><i data-feather="message-square"></i> Special Requirements / Seat Preferences</label>
+          <textarea class="form-control" id="bookNotes" rows="3" placeholder="Single trip / Round trip, upper deck seat preferences, food requirements..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">
+          <i data-feather="check-circle"></i> Confirm Ticket Booking Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Destination Detail Modal -->
+  <div class="modal-backdrop" id="destinationModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeDestinationModal()">&times;</button>
+      <div id="destinationModalContent">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
