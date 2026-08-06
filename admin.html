@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Tour Guidance BD & MV Karnafully Partner</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B2518'/><path d='M50 20 L65 50 L50 42 L35 50 Z' fill='%23D4AF37'/><path d='M50 80 L65 50 L50 58 L35 50 Z' fill='%23355E3B'/></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body style="background:#F4F7F4;">
+
+  <!-- ========== AUTH GUARD SCRIPT (runs before body renders) ========== -->
+  <script>
+    (function() {
+      const token = sessionStorage.getItem('tgbd_admin_token');
+      const expiry = sessionStorage.getItem('tgbd_token_exp');
+      if (!token || !expiry || Date.now() > parseInt(expiry, 10)) {
+        sessionStorage.removeItem('tgbd_admin_token');
+        sessionStorage.removeItem('tgbd_token_exp');
+        sessionStorage.removeItem('tgbd_admin_user');
+        window.location.href = 'login.html';
+      }
+    })();
+  </script>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <div class="logo-icon" style="width:36px; height:36px;" id="sidebarLogoIcon">
+          <i data-feather="compass"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title" style="color:#FFF; font-size:1.05rem;" id="sidebarBrandName">Tour Guidance <span style="color:var(--accent-gold);">BD</span></span>
+          <span class="logo-tagline" style="font-size:0.6rem;" id="sidebarTagline">Admin Management Portal</span>
+        </div>
+      </div>
+
+      <!-- Logged-in user pill -->
+      <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 14px; margin-bottom:16px; display:flex; align-items:center; gap:10px;">
+        <div style="width:30px; height:30px; border-radius:50%; background:var(--accent-gold); color:var(--primary-dark); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem;" id="adminUserAvatar">A</div>
+        <div>
+          <div style="color:#fff; font-weight:600; font-size:0.82rem;" id="adminUserName">admin</div>
+          <div style="color:rgba(255,255,255,0.4); font-size:0.7rem;">Administrator</div>
+        </div>
+        <button onclick="logoutAdmin()" title="Logout" style="margin-left:auto; background:none; border:none; color:rgba(255,255,255,0.35); cursor:pointer; padding:4px;" onmouseover="this.style.color='#FC8585'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+          <i data-feather="log-out" style="width:15px;"></i>
+        </button>
+      </div>
+
+      <nav class="admin-menu">
+        <button class="admin-tab-btn active" onclick="switchAdminTab(this, 'dashTab')">
+          <i data-feather="grid"></i> Dashboard Overview
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'karnafullyTab')">
+          <i data-feather="anchor"></i> Karnafully Express Tickets
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'brandTab')">
+          <i data-feather="type"></i> Brand & Logo Settings
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'settingsTab')">
+          <i data-feather="settings"></i> Site & Social Links
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'destinationsTab')">
+          <i data-feather="map-pin"></i> Destinations Manager
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'packagesTab')">
+          <i data-feather="package"></i> Tour Packages Manager
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'servicesTab')">
+          <i data-feather="layers"></i> Services Manager
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'reviewsTab')">
+          <i data-feather="message-circle"></i> Customer Reviews
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'leadsTab')">
+          <i data-feather="inbox"></i> Booking Leads <span class="badge-count" id="leadCountBadge">0</span>
+        </button>
+        <button class="admin-tab-btn" onclick="switchAdminTab(this, 'securityTab')">
+          <i data-feather="lock"></i> Security & Password
+        </button>
+      </nav>
+
+      <div style="margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1);">
+        <a href="index.html" class="btn btn-outline" style="width:100%; justify-content:center; padding:10px; font-size:0.875rem;">
+          <i data-feather="external-link"></i> Back to Main Site
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <!-- Top Action Bar -->
+      <header class="admin-header">
+        <div class="admin-title-area">
+          <h1 id="adminPageTitle">Dashboard Overview</h1>
+          <p id="adminPageSubtitle">Manage all content, MV Karnafully Express tickets, social links, and booking leads.</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <button class="btn btn-outline-dark btn-sm" onclick="exportDataJSON()">
+            <i data-feather="download"></i> Export Data Backup
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="resetToDefaults()">
+            <i data-feather="rotate-ccw"></i> Reset Defaults
+          </button>
+          <button class="btn btn-outline-dark btn-sm" onclick="logoutAdmin()" style="color:#FC8585;">
+            <i data-feather="log-out"></i> Logout
+          </button>
+        </div>
+      </header>
+
+      <!-- ===== TAB: Dashboard Overview ===== -->
+      <section class="admin-content-section active" id="dashTab">
+        <div class="dashboard-grid">
+          <div class="dashboard-stat-card">
+            <div class="dash-icon-box"><i data-feather="inbox"></i></div>
+            <div class="dash-info">
+              <span class="dash-val" id="dashTotalLeads">0</span>
+              <span class="dash-lbl">Booking Inquiries</span>
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="dash-icon-box"><i data-feather="anchor"></i></div>
+            <div class="dash-info">
+              <span class="dash-val" id="dashTotalKarnafully">8</span>
+              <span class="dash-lbl">MV Karnafully Classes</span>
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="dash-icon-box"><i data-feather="map-pin"></i></div>
+            <div class="dash-info">
+              <span class="dash-val" id="dashTotalDest">0</span>
+              <span class="dash-lbl">Destinations</span>
+            </div>
+          </div>
+          <div class="dashboard-stat-card">
+            <div class="dash-icon-box"><i data-feather="star"></i></div>
+            <div class="dash-info">
+              <span class="dash-val" id="dashTotalReviews">0</span>
+              <span class="dash-lbl">Traveler Reviews</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="clock"></i> Recent Customer Booking Leads</h3>
+            <button class="btn btn-outline-dark btn-sm" onclick="switchAdminTabByTabId('leadsTab')">View All</button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Ref ID</th>
+                  <th>Customer Name</th>
+                  <th>Phone / WhatsApp</th>
+                  <th>Package / Ticket</th>
+                  <th>Travel Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashRecentLeadsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: MV Karnafully Express Tickets ===== -->
+      <section class="admin-content-section" id="karnafullyTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="anchor"></i> MV Karnafully Express Ticket Tiers</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Class Tier Name</th>
+                  <th>Seats Capacity</th>
+                  <th>Single Trip Price</th>
+                  <th>Round Trip Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="karnafullyTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Brand & Logo Settings ===== -->
+      <section class="admin-content-section" id="brandTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="type"></i> Brand Identity & Logo Settings</h3>
+          </div>
+
+          <!-- Live Preview -->
+          <div style="background:linear-gradient(135deg, #0B2518, #133E2B); border-radius:16px; padding:28px 32px; margin-bottom:28px; border:1px solid rgba(212,175,55,0.2);">
+            <p style="color:rgba(255,255,255,0.5); font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">Live Preview</p>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div id="brandPreviewIcon" style="width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,#D4AF37,#C59B27); display:flex; align-items:center; justify-content:center; color:#0B2518; font-size:1.4rem; font-weight:800; overflow:hidden;">
+                <i data-feather="compass" id="previewIconEl"></i>
+              </div>
+              <div>
+                <div style="font-family:'Poppins',sans-serif; font-size:1.3rem; font-weight:800; color:#FFFFFF;" id="brandPreviewName">Tour Guidance BD</div>
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.5);" id="brandPreviewTagline">Luxury & Heritage Travel</div>
+              </div>
+            </div>
+          </div>
+
+          <form id="brandForm" onsubmit="saveBrandSettings(event)">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+              <div class="form-group">
+                <label><i data-feather="type"></i> Company / Site Name</label>
+                <input type="text" class="form-control" id="setBrandName" placeholder="e.g. Tour Guidance BD" required oninput="updateBrandPreview()">
+              </div>
+              <div class="form-group">
+                <label><i data-feather="edit-3"></i> Tagline / Slogan</label>
+                <input type="text" class="form-control" id="setBrandTagline" placeholder="e.g. Luxury & Heritage Travel" oninput="updateBrandPreview()">
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+              <div class="form-group">
+                <label><i data-feather="image"></i> Logo Icon (Feather Icon Name)</label>
+                <input type="text" class="form-control" id="setBrandIcon" placeholder="e.g. compass, anchor, navigation, map" oninput="updateBrandPreview()">
+                <p style="font-size:0.75rem; color:var(--text-light); margin-top:6px;">
+                  Available icons: <a href="https://feathericons.com/" target="_blank" style="color:var(--primary-green);">feathericons.com</a> — use the icon name (e.g. <code>compass</code>)
+                </p>
+              </div>
+              <div class="form-group">
+                <label><i data-feather="image"></i> Custom Logo Image URL (Optional)</label>
+                <input type="url" class="form-control" id="setBrandLogoUrl" placeholder="https://yourdomain.com/logo.png" oninput="updateBrandPreview()">
+                <p style="font-size:0.75rem; color:var(--text-light); margin-top:6px;">If set, this image replaces the icon in the logo.</p>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-green">
+              <i data-feather="save"></i> Save Brand Settings
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Site Settings & Social Links ===== -->
+      <section class="admin-content-section" id="settingsTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="globe"></i> Contact Info & License Details</h3>
+          </div>
+          <form id="settingsForm" onsubmit="saveSiteSettings(event)">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+              <div class="form-group">
+                <label><i data-feather="phone"></i> Primary Hotline</label>
+                <input type="text" class="form-control" id="setHotline" required placeholder="e.g. +880 1610-051005">
+              </div>
+              <div class="form-group">
+                <label><i data-feather="phone-call"></i> Secondary Hotline</label>
+                <input type="text" class="form-control" id="setHotlineAlt" required placeholder="e.g. 09613-888000">
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+              <div class="form-group">
+                <label><i data-feather="message-circle"></i> WhatsApp Support Number</label>
+                <input type="text" class="form-control" id="setWhatsapp" required placeholder="e.g. +880 1610-051005 or 01610051005">
+              </div>
+              <div class="form-group">
+                <label><i data-feather="mail"></i> Email Address</label>
+                <input type="email" class="form-control" id="setEmail" required>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+              <div class="form-group">
+                <label><i data-feather="shield"></i> Government License #</label>
+                <input type="text" class="form-control" id="setLicense" required>
+              </div>
+              <div class="form-group">
+                <label><i data-feather="map-pin"></i> Full Office Address</label>
+                <input type="text" class="form-control" id="setAddress" required>
+              </div>
+            </div>
+
+            <h4 style="font-size:1.1rem; color:var(--primary-dark); margin-bottom:16px; margin-top:28px;">
+              <i data-feather="share-2" style="width:18px;"></i> Social Media Links
+            </h4>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+              <div class="form-group">
+                <label><i data-feather="facebook"></i> Facebook Page URL</label>
+                <input type="url" class="form-control" id="setSocialFb">
+              </div>
+              <div class="form-group">
+                <label><i data-feather="instagram"></i> Instagram Profile URL</label>
+                <input type="url" class="form-control" id="setSocialIg">
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+              <div class="form-group">
+                <label><i data-feather="youtube"></i> YouTube Channel URL</label>
+                <input type="url" class="form-control" id="setSocialYt">
+              </div>
+              <div class="form-group">
+                <label><i data-feather="linkedin"></i> LinkedIn Company URL</label>
+                <input type="url" class="form-control" id="setSocialLi">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-green">
+              <i data-feather="save"></i> Save Site Settings & WhatsApp Number
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Destinations Manager ===== -->
+      <section class="admin-content-section" id="destinationsTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="map-pin"></i> All Destinations</h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddDestinationModal()">
+              <i data-feather="plus"></i> Add New Destination
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Image</th><th>Title</th><th>Badge</th><th>Rating</th><th>Starting Price</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="destinationsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Tour Packages Manager ===== -->
+      <section class="admin-content-section" id="packagesTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="package"></i> All Tour Packages</h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddPackageModal()">
+              <i data-feather="plus"></i> Add New Package
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Banner</th><th>Package Title</th><th>Category</th><th>Duration</th><th>Price (BDT)</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="packagesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Services Manager ===== -->
+      <section class="admin-content-section" id="servicesTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="layers"></i> Travel Services</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr><th>Icon</th><th>Service Name</th><th>Description</th><th>Action</th></tr>
+              </thead>
+              <tbody id="servicesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Customer Reviews ===== -->
+      <section class="admin-content-section" id="reviewsTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="message-circle"></i> Customer Testimonials</h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddReviewModal()">
+              <i data-feather="plus"></i> Add Review
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr><th>Avatar</th><th>Reviewer Name</th><th>Role / Tour</th><th>Stars</th><th>Quote</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="reviewsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Booking Leads ===== -->
+      <section class="admin-content-section" id="leadsTab">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3><i data-feather="inbox"></i> Customer Booking Leads & Inquiries</h3>
+            <button class="btn btn-green btn-sm" onclick="exportLeadsCSV()">
+              <i data-feather="file-text"></i> Export CSV
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr><th>Ref ID</th><th>Customer Name</th><th>Phone / Email</th><th>Package Requested</th><th>Departure Date</th><th>Persons</th><th>Status</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="leadsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: Security & Password ===== -->
+      <section class="admin-content-section" id="securityTab">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+          <!-- Change Username & Password -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3><i data-feather="key"></i> Change Admin Credentials</h3>
+            </div>
+            <form id="securityForm" onsubmit="changeAdminCredentials(event)">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label><i data-feather="user"></i> Current Password</label>
+                <input type="password" class="form-control" id="secCurrentPw" placeholder="Enter your current password" required>
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label><i data-feather="user-check"></i> New Username</label>
+                <input type="text" class="form-control" id="secNewUser" placeholder="New admin username" required>
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label><i data-feather="lock"></i> New Password</label>
+                <input type="password" class="form-control" id="secNewPw" placeholder="Min. 6 characters" required minlength="6">
+              </div>
+              <div class="form-group" style="margin-bottom:24px;">
+                <label><i data-feather="check-circle"></i> Confirm New Password</label>
+                <input type="password" class="form-control" id="secConfirmPw" placeholder="Re-enter new password" required>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;">
+                <i data-feather="save"></i> Update Credentials
+              </button>
+            </form>
+          </div>
+
+          <!-- Session & Info -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3><i data-feather="shield"></i> Session Information</h3>
+            </div>
+
+            <div style="background:var(--bg-light); border-radius:12px; padding:18px 20px; margin-bottom:16px; border:1px solid var(--border-light);">
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                <i data-feather="user" style="color:var(--primary-green);"></i>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-light); text-transform:uppercase;">Logged In As</div>
+                  <strong id="secLoggedInUser" style="color:var(--primary-dark);">admin</strong>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+                <i data-feather="clock" style="color:var(--primary-green);"></i>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-light); text-transform:uppercase;">Session Expires</div>
+                  <strong id="secTokenExpiry" style="color:var(--primary-dark);">2 hours from login</strong>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <i data-feather="check-circle" style="color:#22C55E;"></i>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-light); text-transform:uppercase;">Security Status</div>
+                  <strong style="color:#22C55E;">Active & Authenticated</strong>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:rgba(212,175,55,0.07); border:1px solid var(--border-gold); border-radius:12px; padding:16px 18px; margin-bottom:16px;">
+              <h4 style="font-size:0.9rem; color:var(--primary-dark); margin-bottom:8px;"><i data-feather="info" style="width:14px;"></i> Security Tips</h4>
+              <ul style="font-size:0.82rem; color:var(--text-secondary); line-height:1.7; padding-left:16px;">
+                <li>Change default password after first login</li>
+                <li>Use a strong password (8+ chars, numbers, symbols)</li>
+                <li>Never share admin credentials</li>
+                <li>Sessions expire automatically after 2 hours</li>
+              </ul>
+            </div>
+
+            <button onclick="logoutAdmin()" class="btn btn-outline-dark" style="width:100%; color:#FC8585;">
+              <i data-feather="log-out"></i> Sign Out of Admin Panel
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Destination Form Modal -->
+  <div class="modal-backdrop" id="adminDestModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAdminModal('adminDestModal')">&times;</button>
+      <h3 style="font-size:1.4rem; color:var(--primary-dark); margin-bottom:20px;" id="destModalTitle">Add Destination</h3>
+      <form id="destForm" onsubmit="saveDestinationForm(event)">
+        <input type="hidden" id="destEditId">
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Destination Title</label>
+          <input type="text" class="form-control" id="destTitle" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;">
+          <div class="form-group">
+            <label>Badge Tag</label>
+            <input type="text" class="form-control" id="destBadge" placeholder="e.g. Coral Paradise" required>
+          </div>
+          <div class="form-group">
+            <label>Starting Price (BDT)</label>
+            <input type="text" class="form-control" id="destPrice" placeholder="e.g. ৳ 6,500" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Image URL (HD Unsplash / Image link)</label>
+          <input type="url" class="form-control" id="destImage" required>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Description</label>
+          <textarea class="form-control" id="destDesc" rows="3" required></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Package Inclusions (comma separated)</label>
+          <input type="text" class="form-control" id="destHighlights" placeholder="Bay One Cruise, Deluxe Resort, BBQ Dinner">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save Destination</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Package Form Modal -->
+  <div class="modal-backdrop" id="adminPkgModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAdminModal('adminPkgModal')">&times;</button>
+      <h3 style="font-size:1.4rem; color:var(--primary-dark); margin-bottom:20px;" id="pkgModalTitle">Add Tour Package</h3>
+      <form id="pkgForm" onsubmit="savePackageForm(event)">
+        <input type="hidden" id="pkgEditId">
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Package Name</label>
+          <input type="text" class="form-control" id="pkgTitle" required>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;">
+          <div class="form-group">
+            <label>Category</label>
+            <select class="form-control" id="pkgCategory">
+              <option value="beach">Beach & Island</option>
+              <option value="hill">Hill Tracks</option>
+              <option value="jungle">Jungle & Wildlife</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tag Badge</label>
+            <input type="text" class="form-control" id="pkgTag" placeholder="e.g. Best Seller">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;">
+          <div class="form-group">
+            <label>Duration</label>
+            <input type="text" class="form-control" id="pkgDuration" placeholder="e.g. 3 Days / 2 Nights" required>
+          </div>
+          <div class="form-group">
+            <label>Price (BDT)</label>
+            <input type="text" class="form-control" id="pkgPrice" placeholder="e.g. ৳ 9,500" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Banner Image URL</label>
+          <input type="url" class="form-control" id="pkgImage" required>
+        </div>
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Highlights List (one per line)</label>
+          <textarea class="form-control" id="pkgHighlights" rows="4" placeholder="Bay One Cruise Tickets&#10;5-Star Hotel Stay&#10;Buffet Breakfast"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save Package</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review Form Modal -->
+  <div class="modal-backdrop" id="adminReviewModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAdminModal('adminReviewModal')">&times;</button>
+      <h3 style="font-size:1.4rem; color:var(--primary-dark); margin-bottom:20px;">Add Customer Review</h3>
+      <form id="reviewForm" onsubmit="saveReviewForm(event)">
+        <input type="hidden" id="reviewEditId">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px;">
+          <div class="form-group">
+            <label>Reviewer Name</label>
+            <input type="text" class="form-control" id="reviewName" required>
+          </div>
+          <div class="form-group">
+            <label>Role / Tour Taken</label>
+            <input type="text" class="form-control" id="reviewRole" placeholder="e.g. Dhaka | Saint Martin Tour" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Avatar Photo URL</label>
+          <input type="url" class="form-control" id="reviewAvatar" required>
+        </div>
+        <div class="form-group" style="margin-bottom:20px;">
+          <label>Review Quote</label>
+          <textarea class="form-control" id="reviewQuote" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Save Review</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
